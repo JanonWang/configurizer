@@ -1,2 +1,2 @@
 # configurizer
-Linux/OSX configuration for new machines
+My Linux/OSX configuration files for new machines
