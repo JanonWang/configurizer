@@ -1,0 +1,151 @@
+#!/usr/bin/env python
+
+import sys
+import subprocess
+import getopt
+
+dry_run = True
+
+# DB format: list of <local file>, or 2-tuple of (<local file>, <target file>)
+#   If only local file is specified, we use it as its target file.
+#
+# NOTE: absolute paths are not well tested
+#
+# If local file ends:
+#     '/': this is a directory (copy recursively, except hidden files)
+# If local file starts with:
+#     '+': create a empty file or directory. 
+#          (beware that existing files are deleted)
+#     '!': remove the target file, if exists.
+common = [
+    '.vim/',
+    '+.vim/backups/',
+    '+.vim/swaps/',
+    '.vimrc',
+    '.terminfo/',
+    '.bash_prompt',
+    '.bash_aliases',
+    '.bash_profile',
+    '.bashrc',
+    '.tmux.conf',
+    '.gitconfig',
+    '+.ssh/',
+    '.ssh/id_rsa.pub',
+    '.ssh/authorized_keys',
+    ]
+
+linux = []
+
+osx = []
+
+def run_cmd(cmd):
+    global dry_run
+
+    print '\t\tcmd: %s' % cmd
+    if not dry_run:
+        subprocess.check_call(cmd, shell=True)
+
+def parse_entry(entry):
+    flag_dir = False
+    flag_add = False
+    flag_del = False
+
+    if isinstance(entry, tuple):
+        local, target = entry
+    else:
+        local = entry
+        target = entry
+
+    if local[-1] == '/':
+        flag_dir = True
+        local = local[:-1]
+
+    if local[0] == '+':
+        local = local[1:]
+        flag_add = True
+    elif local[0] == '!':
+        local = local[1:]
+        flag_del = True
+
+    return local, target, flag_dir, flag_add, flag_del
+
+def deploy(db, local_prefix):
+    pass
+
+def collect(db, local_prefix):
+    print 'Processing %s' % local_prefix
+
+    run_cmd('rm -rf %s' % local_prefix)
+    run_cmd('mkdir %s' % local_prefix)
+    run_cmd('echo "git does not allow an empty dir" > %s/.dummy' % local_prefix)
+
+    for entry in db:
+        local, target, flag_dir, flag_add, flag_del = parse_entry(entry)
+
+        print '\tFile %s' % local
+
+        if flag_del:
+            continue
+
+        if local[0] == '/':
+            local_path = local
+        else:
+            local_path = '%s/%s' % (local_prefix, local)
+
+        if target[0] == '/':
+            target_path = target
+        else:
+            target_path = '%s/%s' % ('~', target)
+
+        if flag_add:
+            run_cmd('rm -rf %s' % local_path)
+            if flag_dir:
+                run_cmd('mkdir -p %s' % local_path)
+            else:
+                run_cmd('rm -f %s' % local_path)
+                run_cmd('touch %s' % local_path)
+        else:
+            if flag_dir:
+                run_cmd('cp -R %s %s' % (target_path, local_path))
+            else:
+                run_cmd('cp %s %s' % (target_path, local_path))
+
+def print_usage():
+    print >> sys.stderr, 'Usage: %s [--run] <deploy | collect>' % sys.argv[0]
+    sys.exit(2)
+
+def main():
+    global dry_run
+
+    opts, args = getopt.gnu_getopt(sys.argv[1:], '', ['run'])
+
+    if len(args) != 1 or args[0] not in ['deploy', 'collect']:
+        print_usage()
+
+    for opt, optarg in opts:
+        if opt == '--run':
+            dry_run = False
+        else:
+            print_usage()
+
+    if dry_run:
+        print 'Running in dry-run mode. Use --run to actually run it'
+
+    uname = subprocess.check_output('uname', shell=True).strip()
+    assert(uname in ['Linux', 'Darwin'])
+
+    if args[0] == 'deploy':
+        func = deploy
+    elif args[0] == 'collect':
+        func = collect
+    else:
+        assert False
+
+    func(common, 'common')
+    if uname == 'Linux':
+        func(linux, 'linux')
+    elif uname == 'Darwin':
+        func(osx, 'osx')
+
+if __name__ == '__main__':
+    main()
