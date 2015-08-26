@@ -1,7 +1,7 @@
 # configurizer
-My Linux/OSX configuration files for new machines. Intended for personal use.
+This script synchronizes configuration files across my OSX/Linux machines.
 
-The go.py script can be potentially dangerous. Run it in dry run mode (without --run) first for safety.
+The go.py script can be potentially dangerous (NO WARRANTY). Run it in dry run mode (without --run) first for safety.
 
 ## syncing repo -> machine
 1. `git clone` or `git pull` (make it up-to-date)
