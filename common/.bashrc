@@ -20,18 +20,10 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
-test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-. /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-. /etc/bash_completion
-fi
-
-if [ -f .bash_aliases ]; then
-	. .bash_aliases
-fi
+[[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
+[[ -r ~/.bash_env ]] && . ~/.bash_env
 
 case "$TERM" in
     *color) color_prompt=yes;;

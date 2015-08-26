@@ -23,8 +23,8 @@ common = [
     '+.vim/swaps/',
     '.vimrc',
     '.terminfo/',
+    '.bash_env',
     '.bash_prompt',
-    '.bash_aliases',
     '.bash_profile',
     '.bashrc',
     '.tmux.conf',
@@ -34,9 +34,13 @@ common = [
     '.ssh/authorized_keys',
     ]
 
-linux = []
+linux = [
+    '.bash_aliases',
+    ]
 
-osx = []
+osx = [
+    '.bash_aliases',
+    ]
 
 def run_cmd(cmd):
     global dry_run
@@ -87,7 +91,8 @@ def deploy(db, local_prefix):
     print 'Processing %s' % local_prefix
 
     for entry in db:
-        local_path, target_path, flag_dir, flag_add, flag_del = parse_entry(entry, local_prefix)
+        local_path, target_path, flag_dir, flag_add, flag_del = \
+                parse_entry(entry, local_prefix)
 
         print '\tFile %s' % local_path
 
@@ -99,8 +104,9 @@ def deploy(db, local_prefix):
             else:
                 run_cmd('touch %s' % target_path)
         else:
+            run_cmd('rm -rf %s' % target_path)
             if flag_dir:
-                run_cmd('cp -R %s %s' % (local_path, target_path))
+                run_cmd('cp -r %s %s' % (local_path, target_path))
             else:
                 run_cmd('cp %s %s' % (local_path, target_path))
                 
@@ -110,10 +116,10 @@ def collect(db, local_prefix):
 
     run_cmd('rm -rf %s' % local_prefix)
     run_cmd('mkdir %s' % local_prefix)
-    run_cmd('echo "git does not allow an empty dir" > %s/.dummy' % local_prefix)
 
     for entry in db:
-        local_path, target_path, flag_dir, flag_add, flag_del = parse_entry(entry)
+        local_path, target_path, flag_dir, flag_add, flag_del = \
+                parse_entry(entry, local_prefix)
 
         print '\tFile %s' % local_path
 
@@ -129,7 +135,7 @@ def collect(db, local_prefix):
                 run_cmd('touch %s' % local_path)
         else:
             if flag_dir:
-                run_cmd('cp -R %s %s' % (target_path, local_path))
+                run_cmd('cp -r %s %s' % (target_path, local_path))
             else:
                 run_cmd('cp %s %s' % (target_path, local_path))
 
