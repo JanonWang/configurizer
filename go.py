@@ -14,7 +14,7 @@ dry_run = True
 # If local file ends:
 #     '/': this is a directory (copy recursively, except hidden files)
 # If local file starts with:
-#     '+': create a empty file or directory. 
+#     '+': create an empty file or directory. 
 #          (beware that existing files are deleted)
 #     '!': remove the target file, if exists.
 common = [
@@ -30,8 +30,8 @@ common = [
     '.tmux.conf',
     '.gitconfig',
     '+.ssh/',
-    '.ssh/id_rsa.pub',
     '.ssh/authorized_keys',
+    '.ssh/config'
     ]
 
 linux = [
