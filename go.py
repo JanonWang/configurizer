@@ -48,7 +48,7 @@ def run_cmd(cmd):
 def parse_entry(entry, local_prefix):
     flag_dir = False
     flag_add = False
-    flag_del = False	# flag_add and flag_del cannot be set at the same time
+    flag_del = False    # flag_add and flag_del cannot be set at the same time
 
     target = None
 
@@ -91,19 +91,19 @@ def deploy(db, local_prefix):
 
         print '\tFile %s' % local_path
 
-	if flag_del:
-	    run_cmd('rm -rf %s' % target_path)
-	elif flag_add:
-	    if flag_dir:
-		run_cmd('mkdir -p %s' % target_path)
-	    else:
-		run_cmd('touch %s' % target_path)
-	else:
+        if flag_del:
+            run_cmd('rm -rf %s' % target_path)
+        elif flag_add:
+            if flag_dir:
+                run_cmd('mkdir -p %s' % target_path)
+            else:
+                run_cmd('touch %s' % target_path)
+        else:
             if flag_dir:
                 run_cmd('cp -R %s %s' % (local_path, target_path))
             else:
                 run_cmd('cp %s %s' % (local_path, target_path))
-		
+                
 
 def collect(db, local_prefix):
     print 'Processing %s' % local_prefix
