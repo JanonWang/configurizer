@@ -1,1 +1,3 @@
-EDITOR=vim
+export EDITOR=vim
+export RTE_SDK=/home/sangjin/softnic/3rdparty/dpdk-2.0.0
+export RTE_TARGET=x86_64-native-linuxapp-gcc
