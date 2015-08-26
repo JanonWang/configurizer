@@ -45,16 +45,17 @@ def run_cmd(cmd):
     if not dry_run:
         subprocess.check_call(cmd, shell=True)
 
-def parse_entry(entry):
+def parse_entry(entry, local_prefix):
     flag_dir = False
     flag_add = False
-    flag_del = False
+    flag_del = False	# flag_add and flag_del cannot be set at the same time
+
+    target = None
 
     if isinstance(entry, tuple):
         local, target = entry
     else:
         local = entry
-        target = entry
 
     if local[-1] == '/':
         flag_dir = True
@@ -67,10 +68,42 @@ def parse_entry(entry):
         local = local[1:]
         flag_del = True
 
-    return local, target, flag_dir, flag_add, flag_del
+    if local[0] == '/':
+        local_path = local
+    else:
+        local_path = '%s/%s' % (local_prefix, local)
+
+    if target == None:
+        target = local
+
+    if target[0] == '/':
+        target_path = target
+    else:
+        target_path = '%s/%s' % ('~', target)
+
+    return local_path, target_path, flag_dir, flag_add, flag_del
 
 def deploy(db, local_prefix):
-    pass
+    print 'Processing %s' % local_prefix
+
+    for entry in db:
+        local_path, target_path, flag_dir, flag_add, flag_del = parse_entry(entry, local_prefix)
+
+        print '\tFile %s' % local_path
+
+	if flag_del:
+	    run_cmd('rm -rf %s' % target_path)
+	elif flag_add:
+	    if flag_dir:
+		run_cmd('mkdir -p %s' % target_path)
+	    else:
+		run_cmd('touch %s' % target_path)
+	else:
+            if flag_dir:
+                run_cmd('cp -R %s %s' % (local_path, target_path))
+            else:
+                run_cmd('cp %s %s' % (local_path, target_path))
+		
 
 def collect(db, local_prefix):
     print 'Processing %s' % local_prefix
@@ -80,22 +113,12 @@ def collect(db, local_prefix):
     run_cmd('echo "git does not allow an empty dir" > %s/.dummy' % local_prefix)
 
     for entry in db:
-        local, target, flag_dir, flag_add, flag_del = parse_entry(entry)
+        local_path, target_path, flag_dir, flag_add, flag_del = parse_entry(entry)
 
-        print '\tFile %s' % local
+        print '\tFile %s' % local_path
 
         if flag_del:
             continue
-
-        if local[0] == '/':
-            local_path = local
-        else:
-            local_path = '%s/%s' % (local_prefix, local)
-
-        if target[0] == '/':
-            target_path = target
-        else:
-            target_path = '%s/%s' % ('~', target)
 
         if flag_add:
             run_cmd('rm -rf %s' % local_path)
