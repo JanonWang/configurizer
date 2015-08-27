@@ -6,17 +6,7 @@ set backup
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 
-" Sane coloring
-set background=dark
-syntax on
-set hlsearch
-colorscheme default
-
-highlight DiffAdd    ctermbg=234
-highlight DiffDelete ctermbg=234
-highlight DiffChange ctermbg=234
-highlight DiffText   cterm=bold,underline ctermbg=233
-
+" Some common options
 set number
 set incsearch
 set nocompatible
@@ -24,10 +14,30 @@ set autoindent
 set cindent
 set nowrap
 set modeline
-
 set ruler
-set statusline=[%02n]\ %f\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
 set laststatus=2
+
+" Sane coloring
+set background=dark
+colorscheme default
+syntax on
+
+set hlsearch
+highlight Search term=reverse ctermfg=231 ctermbg=11
+
+highlight DiffAdd	ctermbg=234
+highlight DiffDelete	ctermbg=234
+highlight DiffChange 	ctermbg=234
+highlight DiffText 	cterm=bold,underline ctermbg=233
+
+" Status line with Git branch info 
+let g:git_branch_status_text=""
+let g:git_branch_status_around="<>"
+let g:git_branch_status_nogit="<not in a git repo>"
+let g:git_branch_check_write=1
+highlight SLGit 	ctermfg=110 ctermbg=240
+highlight SLFile 	ctermfg=150 ctermbg=240
+set statusline=[%02n]\ %#SLGit#\ %{GitBranchInfoString()}\ %#SLFile#%f\ %#StatusLine#\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
 
 " QuickFix for make
 autocmd QuickFixCmdPost [^l]* botright cwindow
