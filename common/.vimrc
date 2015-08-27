@@ -34,9 +34,10 @@ highlight DiffText 	cterm=bold,underline ctermbg=233
 let g:git_branch_status_text=""
 let g:git_branch_status_around="<>"
 let g:git_branch_status_nogit="<not in a git repo>"
+let g:git_branch_status_head_current=1
 let g:git_branch_check_write=1
-highlight SLGit 	ctermfg=110 ctermbg=240
-highlight SLFile 	ctermfg=150 ctermbg=240
+highlight SLGit 	ctermfg=110 ctermbg=52
+highlight SLFile 	ctermfg=150 ctermbg=52
 set statusline=[%02n]\ %#SLGit#\ %{GitBranchInfoString()}\ %#SLFile#%f\ %#StatusLine#\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
 
 " QuickFix for make
