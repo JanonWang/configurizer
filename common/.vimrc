@@ -22,6 +22,8 @@ set background=dark
 colorscheme default
 syntax on
 
+highlight Visual	ctermfg=234 ctermbg=7
+
 set hlsearch
 highlight Search term=reverse ctermfg=231 ctermbg=11
 

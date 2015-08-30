@@ -27,6 +27,7 @@ common = [
     '.bash_prompt',
     '.bash_profile',
     '.bashrc',
+    '.dircolors',
     '.tmux.conf',
     '.gitconfig',
     '+.ssh/',

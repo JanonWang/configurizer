@@ -9,3 +9,4 @@
 	email = sangjin@eecs.berkeley.edu
 [push]
 	default = simple
+	followTags = true
