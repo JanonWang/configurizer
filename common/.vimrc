@@ -22,8 +22,6 @@ set background=dark
 colorscheme default
 syntax on
 
-highlight Visual	ctermfg=234 ctermbg=7
-
 set hlsearch
 highlight Search term=reverse ctermfg=231 ctermbg=11
 
@@ -57,6 +55,24 @@ map <F10> :tabn<CR>
 imap <F8> <ESC>:tabe<CR>i
 imap <F9> <ESC>:tabp<CR>i
 imap <F10> <ESC>:tabn<CR>i
+
+" shell support with Tmux
+let g:ScreenImpl='Tmux'
+let g:ScreenShellTmuxInitArgs='-2 -f ~/.tmux-vim.conf'
+let g:ScreenShellInitialFocus='shell'
+let g:ScreenShellQuitOnVimExit=1
+let g:ScreenShellHeight=0
+
+function! s:ScreenShellCheck()
+  let num_panes = screen#ScreenShellGetNumPanes()
+  if g:ScreenShellActive && num_panes == 1
+    execute 'ScreenQuit'
+  endif
+endfunction
+
+autocmd VimResized * call s:ScreenShellCheck()
+nmap <C-y><C-y> :ScreenShell<cr>
+nmap <C-y><C-v> :ScreenShell!<cr>
 
 " ftplugin (see .vim/ftplugin/*.vim)
 filetype plugin indent on
