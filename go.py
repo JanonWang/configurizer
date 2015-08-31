@@ -29,6 +29,7 @@ common = [
     '.bashrc',
     '.dircolors',
     '.tmux.conf',
+    '.tmux-vim.conf',
     '.gitconfig',
     '+.ssh/',
     '.ssh/authorized_keys',
