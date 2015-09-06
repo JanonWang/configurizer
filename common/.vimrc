@@ -33,6 +33,8 @@ highlight DiffDelete	ctermbg=234
 highlight DiffChange 	ctermbg=234
 highlight DiffText 	cterm=bold,underline ctermbg=233
 
+highlight ColorColumn	ctermbg=8
+
 " Status line with Git branch info 
 let g:git_branch_status_text=""
 let g:git_branch_status_around="<>"
