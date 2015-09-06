@@ -42,6 +42,7 @@ linux = [
 
 osx = [
     '.bash_aliases',
+    '.iterm2/'
     ]
 
 def run_cmd(cmd):
