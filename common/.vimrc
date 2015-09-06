@@ -17,6 +17,9 @@ set modeline
 set ruler
 set laststatus=2
 
+" xterm mouse report
+set mouse=a
+
 " Sane coloring
 set background=dark
 colorscheme default
