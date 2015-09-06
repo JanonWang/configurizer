@@ -1,4 +1,3 @@
-set wrap
-set spell
-set whichwrap=h,l,<,>,[,]
-colorscheme desert
+setlocal wrap
+setlocal spell
+setlocal whichwrap=h,l,<,>,[,]

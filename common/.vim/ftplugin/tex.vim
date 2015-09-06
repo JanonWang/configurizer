@@ -1,6 +1,6 @@
-set wrap
-set spell
-set noai
-set whichwrap+=h,l,<,>,[,]
-set textwidth=80
-set colorcolumn=80
+setlocal wrap
+setlocal spell
+setlocal noai
+setlocal whichwrap+=h,l,<,>,[,]
+setlocal textwidth=80
+setlocal colorcolumn=80
