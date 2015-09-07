@@ -15,7 +15,7 @@ set cindent
 set wrap
 set modeline
 set ruler
-set laststatus=10
+set laststatus=2
 set tabstop=4
 set title
 set showmatch
@@ -25,7 +25,7 @@ set mouse=a
 
 " Sane coloring
 set background=dark
-colorscheme elflord
+colorscheme default
 syntax on
 
 set hlsearch
