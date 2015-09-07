@@ -5,7 +5,7 @@
 [alias]
 	d = difftool
 [user]
-	name = Sangjin Han
-	email = sangjin@eecs.berkeley.edu
+	name = Shinae Woo
+	email = shinae2012@gmail.com
 [push]
 	default = simple

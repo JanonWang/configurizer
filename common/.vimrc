@@ -12,17 +12,20 @@ set incsearch
 set nocompatible
 set autoindent
 set cindent
-set nowrap
+set wrap
 set modeline
 set ruler
-set laststatus=2
+set laststatus=10
+set tabstop=4
+set title
+set showmatch
 
 " xterm mouse report
 set mouse=a
 
 " Sane coloring
 set background=dark
-colorscheme default
+colorscheme elflord
 syntax on
 
 set hlsearch
@@ -82,7 +85,6 @@ nmap <C-y><C-v> :ScreenShell!<cr>
 " ftplugin (see .vim/ftplugin/*.vim)
 filetype plugin indent on
 
-au BufNewFile,BufRead *.ringo set filetype=python
-
-cscope add ~/cscopes/linux/cscope.out ~/cscopes/linux
-cscope add ~/cscopes/dpdk/cscope.out ~/cscopes/dpdk
+au BufNewFile,BufRead *.click* set filetype=click
+au BufNewFile,BufRead *.bro set filetype=bro
+au BufNewFile,BufRead *.thrift set filetype=c
