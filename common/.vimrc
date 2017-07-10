@@ -89,4 +89,4 @@ filetype plugin indent on
 au BufNewFile,BufRead *.click* set filetype=click
 au BufNewFile,BufRead *.bro set filetype=bro
 au BufNewFile,BufRead *.thrift set filetype=c
-au BufNewFile,BufRead *.bess set filetype=py
+au BufNewFile,BufRead *.bess set filetype=python
