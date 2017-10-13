@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 import sys
 import subprocess
@@ -14,11 +14,14 @@ dry_run = True
 # If local file ends:
 #     '/': this is a directory (copy recursively, except hidden files)
 # If local file starts with:
-#     '+': create an empty file or directory. 
+#     '+': create an empty file or directory.
 #          (beware that existing files are deleted)
 #     '!': remove the target file, if exists.
 common = [
-    '.vim/',
+    '+.vim/',
+    '.vim/after/',
+    '+.vim/bundle/',
+    '.vim/bundle/Vundle.vim/',
     '+.vim/backups/',
     '+.vim/swaps/',
     '.vimrc',
@@ -29,11 +32,15 @@ common = [
     '.bashrc',
     '.dircolors',
     '.tmux.conf',
-    '.tmux-vim.conf',
     '.gitconfig',
     '+.ssh/',
     '.ssh/authorized_keys',
-    '.ssh/config'
+    '.ssh/config',
+    '+.config/',
+    '+.config/htop/',
+    '.config/htop/htoprc',
+    '.ackrc',
+    '.inputrc',
     ]
 
 linux = [
@@ -42,7 +49,8 @@ linux = [
 
 osx = [
     '.bash_aliases',
-    '.iterm2/'
+    '.iterm2/',
+    '.iterm2-bitmap/',
     ]
 
 def run_cmd(cmd):

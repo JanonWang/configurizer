@@ -40,7 +40,7 @@ TERM xterm-color
 
 ## Special files
 
-NORMAL 00;38;5;250 # no color code at all
+NORMAL 00;38;5;249 # no color code at all
 FILE 00;38;5;249 # regular file: use no color at all
 RESET 0 # reset to "normal" color
 DIR 00;38;5;33 # directory 01;34
@@ -96,37 +96,37 @@ EXEC 00;38;5;112
 .gem    00;38;5;61
 
 # Files of special interest (base1)
-.tex             00;38;5;252
-.rdf             00;38;5;252
-.owl             00;38;5;252
-.n3              00;38;5;252
-.ttl             00;38;5;252
-.nt              00;38;5;252
-.torrent         00;38;5;252
-.xml             00;38;5;252
-*Makefile        00;38;5;252
-*Rakefile        00;38;5;252
-*Dockerfile      00;38;5;252
-*build.xml       00;38;5;252
-*rc              00;38;5;252
-*1               00;38;5;252
-.nfo             00;38;5;252
-*README          00;38;5;252
-*README.txt      00;38;5;252
-*readme.txt      00;38;5;252
-.md              00;38;5;252
-*README.markdown 00;38;5;252
-.ini             00;38;5;252
-.yml             00;38;5;252
-.cfg             00;38;5;252
-.conf            00;38;5;252
-.c               00;38;5;252
-.h               00;38;5;252
-.py              00;38;5;252
-.cpp             00;38;5;252
-.cc              00;38;5;252
-.sqlite          00;38;5;252
-.go              00;38;5;252
+.tex             00;38;5;253
+.rdf             00;38;5;253
+.owl             00;38;5;253
+.n3              00;38;5;253
+.ttl             00;38;5;253
+.nt              00;38;5;253
+.torrent         00;38;5;253
+.xml             00;38;5;253
+*Makefile        00;38;5;253
+*Rakefile        00;38;5;253
+*Dockerfile      00;38;5;253
+*build.xml       00;38;5;253
+*rc              00;38;5;253
+*1               00;38;5;253
+.nfo             00;38;5;253
+*README          00;38;5;253
+*README.txt      00;38;5;253
+*readme.txt      00;38;5;253
+.md              00;38;5;253
+*README.markdown 00;38;5;253
+.ini             00;38;5;253
+.yml             00;38;5;253
+.cfg             00;38;5;253
+.conf            00;38;5;253
+.c               00;38;5;253
+.h               00;38;5;253
+.py              00;38;5;253
+.cpp             00;38;5;253
+.cc              00;38;5;253
+.sqlite          00;38;5;253
+.go              00;38;5;253
 
 # "unimportant" files as logs and backups (base01)
 .log        00;38;5;243
