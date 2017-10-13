@@ -22,21 +22,33 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
-[[ -r ~/.dircolors ]] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+# custom dircolors
+if [[ -x /usr/bin/dircolors ]]; then
+    if [[ -r ~/.dircolors ]]; then
+        eval "$(/usr/bin/dircolors -b ~/.dircolors)"
+    else
+        eval "$(/usr/bin/dircolors -b)"
+    fi
+fi
 
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -r ~/.bash_env ]] && . ~/.bash_env
 
 case "$TERM" in
+    xterm*) color_prompt=yes;;
     *color) color_prompt=yes;;
     screen*) color_prompt=yes;;
 esac
 
 if [ "$color_prompt" = yes ]; then
     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    if [ -f ~/.bash_prompt ]; then
+    if [[ -f ~/.bash_prompt ]]; then
         . ~/.bash_prompt
     fi
 else
     PS1='\u@\h:\w\$ '
 fi
+
+# for Bash on Ubuntu on Windows
+umask 002
+cd ~
