@@ -34,7 +34,6 @@ common = [
     '.tmux.conf',
     '.gitconfig',
     '+.ssh/',
-    '.ssh/authorized_keys',
     '.ssh/config',
     '+.config/',
     '+.config/htop/',
@@ -115,7 +114,6 @@ def deploy(db, local_prefix):
             else:
                 run_cmd('touch %s' % target_path)
         else:
-            run_cmd('rm -rf %s' % target_path)
             if flag_dir:
                 run_cmd('cp -r %s %s' % (local_path, target_path))
             else:
